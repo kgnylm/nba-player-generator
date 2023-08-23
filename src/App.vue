@@ -8,7 +8,10 @@
       &copy; 2023 |
       <a href="https://github.com/kgnylm" target="_blank">GitHub</a> |
       <a href="https://x.com/kgnylm" target="_blank">Twitter</a> |
-      <a href="https://instagram.com/kgn.ylm" target="_blank">Instagram</a>
+      <a href="https://instagram.com/kgn.ylm" target="_blank">Instagram</a> |
+      <a href="https://www.linkedin.com/in/mustafakaganyalim/" target="_blank"
+        >LinkedIn</a
+      >
     </p>
   </footer>
 </template>
@@ -23,8 +26,11 @@ export default {
   },
   created() {
     this.fetchRandomPlayer();
+    window.addEventListener("keydown", this.handleKeyPress);
   },
-
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.handleKeyPress);
+  },
   methods: {
     async fetchRandomPlayer() {
       const { data, error } = await supabase.from("player").select("*");
@@ -32,6 +38,11 @@ export default {
         alert(error);
       } else {
         this.url = data[Math.floor(Math.random() * data.length)].link;
+      }
+    },
+    handleKeyPress(event) {
+      if (event.key === "Enter") {
+        this.fetchRandomPlayer();
       }
     },
   },

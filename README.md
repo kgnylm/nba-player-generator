@@ -1,6 +1,6 @@
 # Nba-Player-Generator
 
-This website built using [Vue.js](https://vuejs.org/) for the front-end and [Supabase](https://supabase.io/) for data storage and authentication. Sorry for any delays during the loading process, as there are 5100 players recorded in the database :)
+This website built using [Vue.js](https://vuejs.org/) for the front-end and [Supabase](https://supabase.io/) for data storage and authentication. Sorry for any delays during the loading process, as there are 922 players recorded in the database :)
 
 ## Project setup
 

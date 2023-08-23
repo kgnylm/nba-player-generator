@@ -5,7 +5,6 @@
   </div>
   <footer class="footer">
     <p>
-      &copy; 2023 |
       <a href="https://github.com/kgnylm" target="_blank">GitHub</a> |
       <a href="https://x.com/kgnylm" target="_blank">Twitter</a> |
       <a href="https://instagram.com/kgn.ylm" target="_blank">Instagram</a> |

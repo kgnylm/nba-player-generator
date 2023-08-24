@@ -45,9 +45,8 @@ export default {
         .select("*")
         .eq("id", randomId)
         .single();
-      console.log(data);
       if (error) {
-        console.log(error);
+        return;
       } else {
         this.url = data.link;
         this.name = data.name;
@@ -58,7 +57,6 @@ export default {
     },
     goToWikipedia() {
       if (this.name) {
-        console.log(this.name);
         const playerName = this.name.replace(" ", "_");
         window.open(`https://en.wikipedia.org/wiki/${playerName}`);
       }

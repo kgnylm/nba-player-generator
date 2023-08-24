@@ -62,7 +62,7 @@ export default {
       }
     },
     handleKeyPress(e) {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || e.key === " ") {
         this.fetchRandomPlayer();
       }
     },

@@ -2,7 +2,9 @@
   <div class="container">
     <img :src="url" alt="Image" class="img" />
     <h1 class="clickable" @click="goToWikipedia">{{ position }} {{ name }}</h1>
-    <button class="refresh-button" @click="fetchRandomPlayer">Generate</button>
+    <button class="refresh-button" @click="fetchRandomPlayer">
+      {{ buttonName }}
+    </button>
   </div>
   <footer class="footer">
     <p>
@@ -23,7 +25,9 @@ export default {
     return {
       url: "",
       name: "",
-      position:"",
+      position: "",
+      buttonName: "Generate",
+      loaded: false,
     };
   },
   created() {
@@ -35,25 +39,33 @@ export default {
   },
   methods: {
     async fetchRandomPlayer() {
-      const { data, error } = await supabase.from("player").select("*");
+      const randomId = Math.floor(Math.random() * 922) + 1;
+      const { data, error } = await supabase
+        .from("player")
+        .select("*")
+        .eq("id", randomId)
+        .single();
+      console.log(data);
       if (error) {
-        alert(error);
+        console.log(error);
       } else {
-        const randomizer = Math.floor(Math.random() * data.length);
-        this.url = data[randomizer].link;
-        this.name = data[randomizer].name;
-        this.position = data[randomizer].pos;
-      }
-    },
-    handleKeyPress(event) {
-      if (event.key === "Enter") {
-        this.fetchRandomPlayer();
+        this.url = data.link;
+        this.name = data.name;
+        this.position = data.pos;
+        this.buttonName = "Generate";
+        this.loaded = true;
       }
     },
     goToWikipedia() {
       if (this.name) {
+        console.log(this.name);
         const playerName = this.name.replace(" ", "_");
         window.open(`https://en.wikipedia.org/wiki/${playerName}`);
+      }
+    },
+    handleKeyPress(e) {
+      if (e.key === "Enter") {
+        this.fetchRandomPlayer();
       }
     },
   },

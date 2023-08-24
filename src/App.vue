@@ -39,6 +39,13 @@ export default {
   },
   methods: {
     async fetchRandomPlayer() {
+      /*
+      const dataLenght = await supabase
+        .from("player")
+        .select('*', { count: 'exact' });
+      console.log("count:",dataLenght);
+      */
+
       const randomId = Math.floor(Math.random() * 922) + 1;
       const { data, error } = await supabase
         .from("player")

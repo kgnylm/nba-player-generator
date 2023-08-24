@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <img :src="url" alt="Image" class="img" />
+    <h1 class="clickable" @click="goToWikipedia">{{ position }} {{ name }}</h1>
     <button class="refresh-button" @click="fetchRandomPlayer">Generate</button>
   </div>
   <footer class="footer">
@@ -21,6 +22,8 @@ export default {
   data() {
     return {
       url: "",
+      name: "",
+      position:"",
     };
   },
   created() {
@@ -36,12 +39,21 @@ export default {
       if (error) {
         alert(error);
       } else {
-        this.url = data[Math.floor(Math.random() * data.length)].link;
+        const randomizer = Math.floor(Math.random() * data.length);
+        this.url = data[randomizer].link;
+        this.name = data[randomizer].name;
+        this.position = data[randomizer].pos;
       }
     },
     handleKeyPress(event) {
       if (event.key === "Enter") {
         this.fetchRandomPlayer();
+      }
+    },
+    goToWikipedia() {
+      if (this.name) {
+        const playerName = this.name.replace(" ", "_");
+        window.open(`https://en.wikipedia.org/wiki/${playerName}`);
       }
     },
   },
@@ -63,6 +75,10 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .refresh-button {

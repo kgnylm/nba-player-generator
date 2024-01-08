@@ -46,7 +46,7 @@ export default {
       console.log("count:",dataLenght);
       */
 
-      const randomId = Math.floor(Math.random() * 922) + 1;
+      const randomId = Math.floor(Math.random() * 940) + 1;
       const { data, error } = await supabase
         .from("player")
         .select("*")
